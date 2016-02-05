@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <CustomAction Id="69c9e744-5e52-46d6-a3b3-269c26497aa5.PresentationBuilderAction"
+                RegistrationType="List"
+                RegistrationId="101"
+                Location="CommandUI.Ribbon"
+                Sequence="10001"
+                Title="Combine Decks"
+                HostWebDialog="true"
+                HostWebDialogHeight="400"
+                HostWebDialogWidth="400">
+    <CommandUIExtension>
+      <!-- 
+      Update the UI definitions below with the controls and the command actions
+      that you want to enable for the custom action.
+      -->
+      <CommandUIDefinitions>
+        <CommandUIDefinition Location="Ribbon.Documents.New.Controls._children">
+          <Button Id="Ribbon.Documents.New.PresentationBuilderActionButton"
+                  Alt="Combine Decks"
+                  Sequence="100"
+                  Command="Invoke_PresentationBuilderActionButtonRequest"
+                  LabelText="Combine Decks"
+                  TemplateAlias="o1"
+                  Image32by32="data:image/png;base64, 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"
+                  Image16by16="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAALiSURBVHjaNIoxCgAwCMSuqB18jf9/lpNIqa2DmULIqio0ZobMxNDd3aGqOyIOM9/vmJ+IICJ4AoiJAQkwMTGBJWCYk5NT8uvXrwuB4l5ANoo8iA0CAAHECDNRV1fX6vXr17VAPisjIyPMTJa/f/8KARV/AYp9gwn+AwJubu7zwsLCFQABxAISYGNj5ZaSkpYAOtn658+fj0AGQA0Bmf4XiHmAmA+qGWS7BBD/A3qNASCAwAb8/ftv2cOHD70lJSUei4qK2N+4cesjzInIAKQZFA68vLwV/Pz8LAICAv8BAghsAFBwEQcH+7VXr15n//z5a4OUlETwt2/f5fn4eHkeP366H1mznJwcAzBc/gJdyMzGxsYAEEBgAz5//rzW2tr62P3799Vevnxp9fHjx2PAUP/27t17RWCYpAH9uxzkImlpaQYODg6GL1++MMLCDyCAWJCdCIoqYAj/ADJ/AG0EKfgFdAWHmJg4OExAoQ9yCTIACCCwAezsbD5Afxl///7dHajoupCQoOvv3791QXpERMQOwdIFUAxsCNAwUIJhB4kDBBA0EP96vX//wZmHh+ebkJDQAqCQHxsbWP7ft2/f/KGK2UACoJAHWmQLDI+LIG8BBBDYAEZGpjwZGWlOYDR2PH/+3B4o8R/kVGAgcQCjNQCY4s4D+ddACRDqmm98fHzHgWHHABBAYAOATvujoqLyGei0bFgqA7oGFCZxQLYJUOwe0IAkoEt/wRIeyCUgSwACiAk5GYMEQAYATQcZoAbMG6nAJOwAlHsKFJ8NigFoGIBpoAUMAAEENwAUQOzs7OBoAhqkCnTeAqD/W9+9e3cXqKEKaLMAUE0F0GYmoLcY3r59ywCMcgaAAIJHo4WFBdhkUA67ceOGDRDv+PPnzw6Qk4Hx/hVocBrQNR1SUlJcQHVfQOIgDBBAcAPExMQYIPmCjeHZs2eLgK74C/IWLEkD+S8lJCQS7ezswM6HhQVAgAEA5+Q8s5BC9k4AAAAASUVORK5CYII=" />
+        </CommandUIDefinition>
+      </CommandUIDefinitions>
+      <CommandUIHandlers>
+        <CommandUIHandler Command="Invoke_PresentationBuilderActionButtonRequest"
+                          CommandAction="~remoteAppUrl/Pages/Combine.aspx?{StandardTokens}&amp;SPListItemId={SelectedItemId}&amp;SPListId={SelectedListId}&amp;IsDlg=1"/>
+      </CommandUIHandlers>
+    </CommandUIExtension >
+  </CustomAction>
+</Elements>
