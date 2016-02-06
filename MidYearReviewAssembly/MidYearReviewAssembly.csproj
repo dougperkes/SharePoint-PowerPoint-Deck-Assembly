@@ -56,21 +56,21 @@
     </AppManifestFile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MidYearReviewAssemblyWeb\MidYearReviewAssemblyWeb.csproj">
-      <Project>{99DC0266-A538-4F00-87D3-1DFB59D19BEC}</Project>
-      <Name>MidYearReviewAssemblyWeb</Name>
-      <Private>True</Private>
-      <RoleType>Web</RoleType>
-      <OutputItemType>SharePointWebProjectOutput</OutputItemType>
-      <RoleName>MidYearReviewAssemblyWeb</RoleName>
-      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="DeckAssemblyRibbonAction\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{a225b49c-47b9-4f51-a1f8-c703e1e2cd87}</SharePointProjectItemId>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PowerPointAssemblyWeb\PowerPointAssemblyWeb.csproj">
+      <Project>{729C564B-4ED7-4A0C-90FE-61539096FF89}</Project>
+      <Name>PowerPointAssemblyWeb</Name>
+      <Private>True</Private>
+      <RoleType>Web</RoleType>
+      <OutputItemType>SharePointWebProjectOutput</OutputItemType>
+      <RoleName>PowerPointAssemblyWeb</RoleName>
+      <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

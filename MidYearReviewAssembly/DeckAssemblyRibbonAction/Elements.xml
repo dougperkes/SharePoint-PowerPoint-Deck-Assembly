@@ -8,7 +8,7 @@
                 Title="Combine Decks"
                 HostWebDialog="true"
                 HostWebDialogHeight="400"
-                HostWebDialogWidth="400">
+                HostWebDialogWidth="650">
     <CommandUIExtension>
       <!-- 
       Update the UI definitions below with the controls and the command actions
@@ -28,7 +28,7 @@
       </CommandUIDefinitions>
       <CommandUIHandlers>
         <CommandUIHandler Command="Invoke_PresentationBuilderActionButtonRequest"
-                          CommandAction="~remoteAppUrl/Pages/Combine.aspx?{StandardTokens}&amp;SPListItemId={SelectedItemId}&amp;SPListId={SelectedListId}&amp;IsDlg=1"/>
+                          CommandAction="~remoteAppUrl/Combine.aspx?{StandardTokens}&amp;SPListItemId={SelectedItemId}&amp;SPListId={SelectedListId}&amp;IsDlg=1"/>
       </CommandUIHandlers>
     </CommandUIExtension >
   </CustomAction>

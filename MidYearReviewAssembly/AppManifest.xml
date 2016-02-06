@@ -8,13 +8,13 @@
 >
   <Properties>
     <Title>MidYearReviewAssembly</Title>
-    <StartPage>https://perkes.sharepoint.com/?{StandardTokens}</StartPage>
+    <StartPage>~remoteAppUrl/?{StandardTokens}</StartPage>
   </Properties>
 
   <AppPrincipal>
     <RemoteWebApplication ClientId="*" />
   </AppPrincipal>
   <AppPermissionRequests>
-    <AppPermissionRequest Scope="http://sharepoint/content/sitecollection/web/list" Right="Write" />
+    <AppPermissionRequest Scope="http://sharepoint/content/sitecollection/web" Right="Write" />
   </AppPermissionRequests>
 </App>

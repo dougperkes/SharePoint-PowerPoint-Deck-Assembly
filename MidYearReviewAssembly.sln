@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidYearReviewAssembly", "MidYearReviewAssembly\MidYearReviewAssembly.csproj", "{18D0DF7C-2350-4E2D-8532-07ECDFC5FED1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MidYearReviewAssemblyWeb", "MidYearReviewAssemblyWeb\MidYearReviewAssemblyWeb.csproj", "{99DC0266-A538-4F00-87D3-1DFB59D19BEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerPointAssemblyWeb", "PowerPointAssemblyWeb\PowerPointAssemblyWeb.csproj", "{729C564B-4ED7-4A0C-90FE-61539096FF89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +19,10 @@ Global
 		{18D0DF7C-2350-4E2D-8532-07ECDFC5FED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18D0DF7C-2350-4E2D-8532-07ECDFC5FED1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{18D0DF7C-2350-4E2D-8532-07ECDFC5FED1}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{99DC0266-A538-4F00-87D3-1DFB59D19BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99DC0266-A538-4F00-87D3-1DFB59D19BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99DC0266-A538-4F00-87D3-1DFB59D19BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99DC0266-A538-4F00-87D3-1DFB59D19BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{729C564B-4ED7-4A0C-90FE-61539096FF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{729C564B-4ED7-4A0C-90FE-61539096FF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{729C564B-4ED7-4A0C-90FE-61539096FF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{729C564B-4ED7-4A0C-90FE-61539096FF89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
