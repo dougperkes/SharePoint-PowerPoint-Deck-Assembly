@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Combine.aspx.cs" Inherits="PowerPointAssemblyWeb.Combine" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CombineAspose.aspx.cs" Inherits="PowerPointAssemblyWeb.CombineAspose" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -94,4 +94,3 @@
     </form>
     
 </body>
-</html>

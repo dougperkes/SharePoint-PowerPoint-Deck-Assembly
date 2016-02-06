@@ -1,6 +1,6 @@
-﻿using DocumentFormat.OpenXml.Packaging;
+﻿using Aspose.Slides;
+using DocumentFormat.OpenXml.Packaging;
 using Microsoft.SharePoint.Client;
-using OpenXmlPowerTools;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace PowerPointAssemblyWeb
 {
-    public partial class Combine : System.Web.UI.Page
+    public partial class CombineAspose : System.Web.UI.Page
     {
         protected void Page_PreInit(object sender, EventArgs e)
         {
@@ -94,7 +94,7 @@ namespace PowerPointAssemblyWeb
 
                         var allIds = "";
                         var tempFiles = new List<ShptFile>();
-                        foreach(var file in allFiles)
+                        foreach (var file in allFiles)
                         {
                             if (file.Name.EndsWith(".pptx", StringComparison.CurrentCultureIgnoreCase)
                                 && file.ListItemAllFields["Order0"] != null)
@@ -120,7 +120,7 @@ namespace PowerPointAssemblyWeb
                             file.Index = index + 1;
                             allIds += file.Id + ",";
                             files.Add(file);
-                            order.Add((index+1).ToString());
+                            order.Add((index + 1).ToString());
                         }
 
                         allIdsHidden.Value = allIds;
@@ -145,7 +145,8 @@ namespace PowerPointAssemblyWeb
             if (Request["SPListItemId"] != null && Request["SPListItemId"] != "null")
             {
                 listItemIDs = Request["SPListItemId"].Split(',');
-            } else
+            }
+            else
             {
                 listItemIDs = allIdsHidden.Value.Split(',');
             }
@@ -160,7 +161,8 @@ namespace PowerPointAssemblyWeb
                 clientContext.ExecuteQuery();
 
                 //setup sources for the combined file
-                List<OrderedSlideSource> sources = new List<OrderedSlideSource>();
+                //List<OrderedSlideSource> sources = new List<OrderedSlideSource>();
+                var files = new List<ShptFile>();
 
                 //check if row is selected
                 foreach (GridViewRow rowItem in gridViewSelectedFiles.Rows)
@@ -170,45 +172,68 @@ namespace PowerPointAssemblyWeb
                     DropDownList cbo = (DropDownList)rowItem.Cells[2].FindControl("cboOrder");
                     if (chk.Checked)
                     {
-                        //read the binary and prepare to combine
-                        var file = list.GetItemById(Convert.ToInt32(listItemIDs[rowItem.RowIndex])).File;
-                        clientContext.Load(file);
-                        clientContext.ExecuteQuery();
-
-                        var stream = file.OpenBinaryStream();
-                        clientContext.ExecuteQuery();
-
-                        using (MemoryStream ms = new MemoryStream())
+                        files.Add(new ShptFile()
                         {
-                            stream.Value.CopyTo(ms);
-                            var doc = new PmlDocument(file.Name, ms.ToArray());
-                            sources.Add(new OrderedSlideSource(doc, chkFormat.Checked, Convert.ToInt32(cbo.SelectedValue)));
-                        }
+                            Id = Convert.ToInt32(listItemIDs[rowItem.RowIndex]),
+                            Index = Convert.ToInt32(cbo.SelectedValue)
+                        });
                     }
+
                 }
 
-                //combine docs
-                if (sources.Count > 1)
+                if (files.Count > 1)
                 {
                     //reorder
-                    var s = new List<SlideSource>();
-                    foreach (var ss in sources.OrderBy(i => i.Order))
-                        s.Add(ss);
-
-                    var combined = PresentationBuilder.BuildPresentation(s, 1);
-
-                    using (var combinedStream = new MemoryStream(combined.DocumentByteArray))
+                    using (Presentation combined = new Presentation())
                     {
-                        string fileName = ((txtFileName.Text.EndsWith(".pptx", StringComparison.CurrentCultureIgnoreCase)) ? txtFileName.Text : txtFileName.Text + ".pptx");
-                        list.RootFolder.UploadFile(fileName, combinedStream, true);
+                        
+                        foreach (var ss in files.OrderBy(i => i.Index))
+                        {
+                            //read the binary and prepare to combine
+                            var file = list.GetItemById(ss.Id).File;
+                            clientContext.Load(file);
+                            clientContext.ExecuteQuery();
+
+                            var stream = file.OpenBinaryStream();
+                            clientContext.ExecuteQuery();
+                            using (var ms = stream.Value)
+                            {
+                                try {
+                                    using (Presentation sourceSlide = new Presentation(ms))
+                                    {
+                                        combined.SlideSize.Type = sourceSlide.SlideSize.Type;
+                                        combined.SlideSize.Size = sourceSlide.SlideSize.Size;
+
+                                        ISlide slide = sourceSlide.Slides[0];
+                                        var bitmap = slide.GetThumbnail(1.0f, 1.0f); // new System.Drawing.Size(16680, 11760));
+                                        bitmap.Save(Server.MapPath("~/App_Data/Slide_" + ss.Index + "_0.png"), System.Drawing.Imaging.ImageFormat.Png);
+                                        combined.Slides.AddClone(slide);
+                                    }
+                                } catch (Exception ex)
+                                {
+                                    //TODO: better handle exceptions here. Not sure why we are getting Out of memory exceptions.
+                                    System.Diagnostics.Debug.WriteLine(ex.ToString());
+                                }
+                            }
+                        }
+
+                        using (var combinedStream = new MemoryStream())
+                        {
+                            //combined.Save(combinedStream, Aspose.Slides.Export.SaveFormat.Pptx);
+                            combined.Save(Server.MapPath("~/App_Data/temp.pptx"), Aspose.Slides.Export.SaveFormat.Pptx);
+
+                            string fileName = ((txtFileName.Text.EndsWith(".pptx", StringComparison.CurrentCultureIgnoreCase)) ? txtFileName.Text : txtFileName.Text + ".pptx");
+                            //list.RootFolder.UploadFile(fileName, combinedStream, true);
+                            list.RootFolder.UploadFile(fileName, Server.MapPath("~/App_Data/temp.pptx"), true);
+                        }
+
                     }
                 }
+
+                //add script to page to close dialog and refresh page
+                ScriptManager.RegisterClientScriptBlock(this, typeof(Combine), "closeDialog", "closeParentDialog(true);", true);
             }
-
-            //add script to page to close dialog and refresh page
-            ScriptManager.RegisterClientScriptBlock(this, typeof(Combine), "closeDialog", "closeParentDialog(true);", true);
         }
-
         protected void gridViewSelectedFiles_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             //ignore hearder
@@ -225,7 +250,7 @@ namespace PowerPointAssemblyWeb
         }
     }
 
-    public class ShptFile
+    public class ShptFileAspose
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -233,12 +258,4 @@ namespace PowerPointAssemblyWeb
         public int Index { get; set; }
     }
 
-    public class OrderedSlideSource : SlideSource
-    {
-        public OrderedSlideSource(PmlDocument doc, bool keepMaster, int order) : base(doc, keepMaster)
-        {
-            this.Order = order;
-        }
-        public int Order { get; set; }
-    }
 }

@@ -8,7 +8,7 @@
 >
   <Properties>
     <Title>MidYearReviewAssembly</Title>
-    <StartPage>~remoteAppUrl/?{StandardTokens}</StartPage>
+    <StartPage>~remoteAppUrl/Default.aspx?{StandardTokens}</StartPage>
   </Properties>
 
   <AppPrincipal>
